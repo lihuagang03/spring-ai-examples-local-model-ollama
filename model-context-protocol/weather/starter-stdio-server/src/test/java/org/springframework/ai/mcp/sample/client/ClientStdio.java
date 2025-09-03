@@ -36,12 +36,15 @@ public class ClientStdio {
 
 	public static void main(String[] args) {
 
+		// MCP 服务端jar
 		var stdioParams = ServerParameters.builder("java")
 			.args("-jar",
 					"model-context-protocol/weather/starter-stdio-server/target/mcp-weather-stdio-server-0.0.1-SNAPSHOT.jar")
 			.build();
 
+		// 标准IO 客户端传输通信
 		var transport = new StdioClientTransport(stdioParams);
+		// MCP 客户端，同步通信
 		var client = McpClient.sync(transport).build();
 
 		client.initialize();
@@ -50,6 +53,7 @@ public class ClientStdio {
 		ListToolsResult toolsList = client.listTools();
 		System.out.println("Available Tools = " + toolsList);
 
+		// 调用工具
 		CallToolResult weatherForcastResult = client.callTool(new CallToolRequest("getWeatherForecastByLocation",
 				Map.of("latitude", "47.6062", "longitude", "-122.3321")));
 		System.out.println("Weather Forcast: " + weatherForcastResult);

@@ -84,6 +84,8 @@ public class WeatherService {
 		}
 	}
 
+	// 工具定义
+
 	/**
 	 * Get forecast for a specific latitude/longitude
 	 * @param latitude Latitude
