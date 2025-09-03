@@ -25,6 +25,7 @@ import org.springframework.web.reactive.function.client.WebClient;
 public class ClientSse {
 
 	public static void main(String[] args) {
+		// 流式SSE 客户端传输
 		var transport = new WebFluxSseClientTransport(WebClient.builder().baseUrl("http://localhost:8080"));
 
 		new SampleClient(transport).run();

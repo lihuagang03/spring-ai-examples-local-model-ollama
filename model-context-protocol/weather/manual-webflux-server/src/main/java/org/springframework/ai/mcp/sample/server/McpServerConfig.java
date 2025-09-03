@@ -48,6 +48,7 @@ public class McpServerConfig {
 
 	@Bean
 	public WeatherApiClient weatherApiClient() {
+		// WeatherApiClient 工具对象实例
 		return new WeatherApiClient();
 	}
 
