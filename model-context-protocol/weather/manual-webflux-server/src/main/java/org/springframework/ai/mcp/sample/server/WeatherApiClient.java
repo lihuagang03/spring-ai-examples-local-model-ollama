@@ -26,6 +26,9 @@ import org.springframework.ai.tool.annotation.Tool;
 import org.springframework.web.client.RestClient;
 import org.springframework.web.client.RestClientException;
 
+/**
+ * 气象接口客户端
+ */
 public class WeatherApiClient {
 
 	private static final String BASE_URL = "https://api.weather.gov";
