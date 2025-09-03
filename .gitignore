@@ -62,5 +62,6 @@ MANIFEST
 ### Integration Testing ###
 logs/
 *.log
+*.log.*.gz
 test-report.md
 integration-results.md
