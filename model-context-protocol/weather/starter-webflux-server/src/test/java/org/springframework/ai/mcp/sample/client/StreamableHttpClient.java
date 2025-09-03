@@ -31,10 +31,12 @@ import org.springframework.web.reactive.function.client.WebClient;
 public class StreamableHttpClient {
 
 	public static void main(String[] args) {
-		
+
+		// 数据流式HTTP传输
 		var transport = WebClientStreamableHttpTransport.builder(WebClient.builder().baseUrl("http://localhost:8080"))
 				.build();
 
+		// MCP 客户端，同步通信
 		var client = McpClient.sync(transport).build();
 
 		client.initialize();
@@ -44,6 +46,8 @@ public class StreamableHttpClient {
 		// List and demonstrate tools
 		ListToolsResult toolsList = client.listTools();
 		System.out.println("Available Tools = " + toolsList);
+
+		// 调用工具
 
 		CallToolResult weatherForcastResult = client.callTool(new CallToolRequest("getWeatherForecastByLocation",
 				Map.of("latitude", "47.6062", "longitude", "-122.3321")));
