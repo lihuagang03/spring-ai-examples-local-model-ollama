@@ -48,7 +48,6 @@ public class StreamableHttpClient {
 		System.out.println("Available Tools = " + toolsList);
 
 		// 调用工具
-
 		CallToolResult weatherForcastResult = client.callTool(new CallToolRequest("getWeatherForecastByLocation",
 				Map.of("latitude", "47.6062", "longitude", "-122.3321")));
 		System.out.println("Weather Forcast: " + weatherForcastResult);
