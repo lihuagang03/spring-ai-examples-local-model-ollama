@@ -29,6 +29,9 @@ import io.modelcontextprotocol.spec.McpSchema.ListToolsResult;
 
 public class SampleClient {
 
+	/**
+	 * MCP 客户端传输
+	 */
 	private final McpClientTransport transport;
 
 	public SampleClient(McpClientTransport transport) {
@@ -37,6 +40,7 @@ public class SampleClient {
 
 	public void run() {
 
+		// MCP 客户端，同步通信
 		var client = McpClient.sync(this.transport).build();
 
 		client.initialize();
@@ -46,6 +50,8 @@ public class SampleClient {
 		// List and demonstrate tools
 		ListToolsResult toolsList = client.listTools();
 		System.out.println("Available Tools = " + toolsList);
+
+		// 调用工具
 
 		CallToolResult weatherForcastResult = client.callTool(new CallToolRequest("getWeatherForecastByLocation",
 				Map.of("latitude", "47.6062", "longitude", "-122.3321")));

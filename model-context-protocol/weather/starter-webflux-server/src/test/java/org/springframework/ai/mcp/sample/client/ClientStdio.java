@@ -33,14 +33,16 @@ public class ClientStdio {
 
 	public static void main(String[] args) {
 
-		System.out.println(new File(".").getAbsolutePath());
+//		System.out.println(new File(".").getAbsolutePath());
 
+		// MCP 服务端参数
 		var stdioParams = ServerParameters.builder("java")
 				.args("-Dspring.ai.mcp.server.stdio=true", "-Dspring.main.web-application-type=none",
 						"-Dlogging.pattern.console=", "-jar",
 						"model-context-protocol/weather/starter-webflux-server/target/mcp-weather-starter-webflux-server-0.0.1-SNAPSHOT.jar")
 				.build();
 
+		// 标准IO 客户端传输
 		var transport = new StdioClientTransport(stdioParams);
 
 		new SampleClient(transport).run();
