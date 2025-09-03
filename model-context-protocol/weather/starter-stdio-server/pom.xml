@@ -32,6 +32,7 @@
     </dependencyManagement>
 
     <dependencies>
+        <!-- mcp-server -->
         <dependency>
             <groupId>org.springframework.ai</groupId>
             <artifactId>spring-ai-starter-mcp-server</artifactId>

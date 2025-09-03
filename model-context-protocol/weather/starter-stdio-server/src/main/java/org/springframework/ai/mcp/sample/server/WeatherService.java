@@ -123,7 +123,7 @@ public class WeatherService {
 	 * @throws RestClientException if the request fails
 	 */
 	@Tool(description = "Get weather alerts for a US state. Input is Two-letter US state code (e.g. CA, NY)")
-	public String getAlerts(@ToolParam( description =  "Two-letter US state code (e.g. CA, NY") String state) {
+	public String getAlerts(@ToolParam(description = "Two-letter US state code (e.g. CA, NY") String state) {
 		Alert alert = restClient.get().uri("/alerts/active/area/{state}", state).retrieve().body(Alert.class);
 
 		return alert.features()
