@@ -15,6 +15,9 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.reactive.function.server.RouterFunction;
 
+/**
+ * MCP 服务端配置
+ */
 @Configuration
 public class McpServerConfig {
 
@@ -22,6 +25,7 @@ public class McpServerConfig {
 	@Bean
 	@ConditionalOnProperty(prefix = "transport", name = "mode", havingValue = "stdio")
 	public StdioServerTransportProvider stdioServerTransportProvider() {
+		// 标准IO 服务端传输通信提供者
 		return new StdioServerTransportProvider();
 	}
 
@@ -29,6 +33,7 @@ public class McpServerConfig {
 	@Bean
 	@ConditionalOnProperty(prefix = "transport", name = "mode", havingValue = "sse")
 	public WebFluxSseServerTransportProvider sseServerTransportProvider() {
+		// 流式SSE 服务端传输通信提供者
 		return new WebFluxSseServerTransportProvider(new ObjectMapper(), "/mcp/message");
 	}
 
@@ -37,6 +42,7 @@ public class McpServerConfig {
 	@Bean
 	@ConditionalOnProperty(prefix = "transport", name = "mode", havingValue = "sse")
 	public RouterFunction<?> mcpRouterFunction(WebFluxSseServerTransportProvider transportProvider) {
+		// 路由函数，SSE传输
 		return transportProvider.getRouterFunction();
 	}
 
@@ -49,14 +55,16 @@ public class McpServerConfig {
 	public McpSyncServer mcpServer(McpServerTransportProvider transportProvider, WeatherApiClient weatherApiClient) { // @formatter:off
 
 		// Configure server capabilities with resource support
+		// 服务端功能
 		var capabilities = McpSchema.ServerCapabilities.builder()
 			.tools(true) // Tool support with list changes notifications
 			.logging() // Logging support
 			.build();
 
 		// Create the server with both tool and resource capabilities
+		// MCP 同步服务端
 		McpSyncServer server = McpServer.sync(transportProvider)
-			.serverInfo("MCP Demo Weather Server", "1.0.0")
+			.serverInfo("MCP Demo Weather Server", "1.0.0") // 服务端信息
 			.capabilities(capabilities)
 			.tools(McpToolUtils.toSyncToolSpecifications(ToolCallbacks.from(weatherApiClient))) // Add @Tools
 			.build();
