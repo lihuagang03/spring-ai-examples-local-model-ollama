@@ -28,11 +28,17 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClient;
 import org.springframework.web.client.RestClientException;
 
+/**
+ * 气象服务
+ */
 @Service
 public class WeatherService {
 
 	private static final String BASE_URL = "https://api.weather.gov";
 
+	/**
+	 * HTTP 客户端
+	 */
 	private final RestClient restClient;
 
 	public WeatherService() {
