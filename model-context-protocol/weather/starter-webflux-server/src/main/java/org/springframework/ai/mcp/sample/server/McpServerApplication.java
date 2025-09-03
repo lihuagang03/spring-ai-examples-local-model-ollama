@@ -17,6 +17,8 @@ public class McpServerApplication {
 
 	@Bean
 	public ToolCallbackProvider weatherTools(WeatherService weatherService) {
+		// 方法工具回调提供者
+		// 工具对象
 		return MethodToolCallbackProvider.builder().toolObjects(weatherService).build();
 	}
 
@@ -25,6 +27,7 @@ public class McpServerApplication {
 
 	@Bean
 	public ToolCallback toUpperCase() {
+		// 函数工具回调
 		return FunctionToolCallback.builder("toUpperCase", (TextInput input) -> input.input().toUpperCase())
 			.inputType(TextInput.class)
 			.description("Put the text to upper case")
