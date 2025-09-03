@@ -28,13 +28,17 @@ public class ClientStdio {
 
 	public static void main(String[] args) {
 
-		System.out.println(new File(".").getAbsolutePath());
+//		System.out.println(new File(".").getAbsolutePath());
 
+		// MCP 服务端参数
 		var stdioParams = ServerParameters.builder("java")
-			.args("-Dtransport.mode=stdio", "-Dspring.main.web-application-type=none", "-jar",
+			.args("-Dtransport.mode=stdio",
+					"-Dspring.main.web-application-type=none",
+					"-jar",
 					"model-context-protocol/weather/manual-webflux-server/target/mcp-weather-server-0.0.1-SNAPSHOT.jar")
 			.build();
 
+		// 标准IO 客户端传输
 		var transport = new StdioClientTransport(stdioParams);
 
 		new SampleClient(transport).run();

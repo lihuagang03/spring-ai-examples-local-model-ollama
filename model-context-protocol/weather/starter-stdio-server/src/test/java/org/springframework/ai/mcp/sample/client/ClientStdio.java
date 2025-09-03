@@ -36,7 +36,7 @@ public class ClientStdio {
 
 	public static void main(String[] args) {
 
-		// MCP 服务端jar
+		// MCP 服务端参数
 		var stdioParams = ServerParameters.builder("java")
 			.args("-jar",
 					"model-context-protocol/weather/starter-stdio-server/target/mcp-weather-stdio-server-0.0.1-SNAPSHOT.jar")
