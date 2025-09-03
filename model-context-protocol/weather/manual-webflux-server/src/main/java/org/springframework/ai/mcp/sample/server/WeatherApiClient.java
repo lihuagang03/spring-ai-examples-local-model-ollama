@@ -30,6 +30,9 @@ public class WeatherApiClient {
 
 	private static final String BASE_URL = "https://api.weather.gov";
 
+	/**
+	 * HTTP 客户端
+	 */
 	private final RestClient restClient;
 
 	public static void main(String[] args) {
@@ -97,6 +100,8 @@ public class WeatherApiClient {
 				@JsonProperty("instruction") String instruction) {
 		}
 	}
+
+	// 工具定义
 
 	/**
 	 * Get forecast for a specific latitude/longitude
