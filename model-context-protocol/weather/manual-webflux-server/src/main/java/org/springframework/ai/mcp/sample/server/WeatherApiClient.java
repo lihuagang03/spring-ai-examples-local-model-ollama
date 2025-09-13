@@ -23,6 +23,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import org.springframework.ai.tool.annotation.Tool;
+import org.springframework.ai.tool.annotation.ToolParam;
 import org.springframework.web.client.RestClient;
 import org.springframework.web.client.RestClientException;
 
@@ -114,7 +115,12 @@ public class WeatherApiClient {
 	 * @throws RestClientException if the request fails
 	 */
 	@Tool(description = "Get weather forecast for a specific latitude/longitude")
-	public String getWeatherForecastByLocation(double latitude, double longitude) {
+	public String getWeatherForecastByLocation(
+			@ToolParam(description = "纬度")
+			double latitude,
+			@ToolParam(description = "经度")
+			double longitude
+	) {
 
 		var points = restClient.get()
 			.uri("/points/{latitude},{longitude}", latitude, longitude)
@@ -139,11 +145,14 @@ public class WeatherApiClient {
 	/**
 	 * Get alerts for a specific area
 	 * @param state Area code. Two-letter US state code (e.g. CA, NY)
-	 * @return Human readable alert information
+	 * @return Human-readable alert information
 	 * @throws RestClientException if the request fails
 	 */
 	@Tool(description = "Get weather alerts for a US state. Input is Two-letter US state code (e.g. CA, NY)")
-	public String getAlerts(String state) {
+	public String getAlerts(
+			@ToolParam(description = "输入是两个字母的美国州代码（例如：CA，NY）")
+			String state
+	) {
 		Alert alert = restClient.get().uri("/alerts/active/area/{state}", state).retrieve().body(Alert.class);
 
 		return alert.features().stream().map(f -> f.toText()).collect(Collectors.joining("\n"));
