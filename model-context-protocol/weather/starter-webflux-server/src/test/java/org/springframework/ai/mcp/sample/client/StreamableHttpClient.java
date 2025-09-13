@@ -32,8 +32,12 @@ public class StreamableHttpClient {
 
 	public static void main(String[] args) {
 
-		// 数据流式HTTP传输
-		var transport = WebClientStreamableHttpTransport.builder(WebClient.builder().baseUrl("http://localhost:8080"))
+		// 流式HTTP传输
+		// 调用 MCP
+		var transport = WebClientStreamableHttpTransport.builder(
+				WebClient.builder()
+						.baseUrl("http://localhost:8080")
+				)
 				.build();
 
 		// MCP 客户端，同步通信
